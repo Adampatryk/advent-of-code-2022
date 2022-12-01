@@ -7,7 +7,7 @@ filepath = pathlib.Path(currentPath, "input.txt")
 f = open(filepath)
 
 #initialise a max variable
-maxCalorieForElf = 0
+elfCalories = []
 
 #initialise a calorie count variable
 currentElfCalorieCount = 0
@@ -20,15 +20,19 @@ for line in f:
         currentElfCalorieCount += int(line)
     else:               #new elf
         #if line is empty, 
-        if (currentElfCalorieCount > maxCalorieForElf):
-            maxCalorieForElf = currentElfCalorieCount
+        elfCalories.append(currentElfCalorieCount)
         currentElfCalorieCount = 0
 
-#must do this one more time for the last elf
-if (currentElfCalorieCount > maxCalorieForElf):
-    maxCalorieForElf = currentElfCalorieCount
+elfCalories.append(currentElfCalorieCount)
+sortedCalories = sorted(elfCalories, reverse=True)
 
-print(f'Elf with the most calories has {maxCalorieForElf} calories!')
+print("Top 3 Calorie Carrying Elves:")
+for i in range(0,3):
+    print(sortedCalories[i])
+print()
+
+print("In total:", sum(sortedCalories[0:3]))
+
 
 
     
