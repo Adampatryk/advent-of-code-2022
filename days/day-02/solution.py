@@ -1,7 +1,7 @@
 import pathlib
 
 currentPath = pathlib.Path(__file__).parent.resolve()
-filepath = pathlib.Path(currentPath, "testInput.txt")
+filepath = pathlib.Path(currentPath, "input.txt")
 
 #open file
 f = open(filepath)
@@ -64,6 +64,8 @@ totalScore = 0
 #for each line
 for line in f:
     opponentHand, yourHand = [hand.strip() for hand in line.split(" ")]
-    totalScore += getRockPaperScissorsResult(yourHand, opponentHand)
+    pointsForThisGame = getRockPaperScissorsResult(yourHand, opponentHand)
+    print(pointsForThisGame)
+    totalScore += pointsForThisGame
 
 print(totalScore)
