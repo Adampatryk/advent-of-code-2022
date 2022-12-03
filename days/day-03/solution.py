@@ -19,6 +19,12 @@ def commonItems(a, b):
     #print(items)
     return items
 
+def commonItem(a, b, c):
+    print(a, b, c)
+    items = list(set(a) & set(b) & set(c))
+    print(items)
+    return items[0]
+
 def sumBackpackCommonItemPriorities(rucksacks):
     total = 0
     for rucksack in rucksacks:
@@ -28,8 +34,7 @@ def sumBackpackCommonItemPriorities(rucksacks):
 
     return total
 
-def main():
-    f = open(filepath)
+def part1(f):
     rucksacks = []
 
     #for each line
@@ -45,5 +50,34 @@ def main():
         rucksacks.append(rucksack)
     
     print(sumBackpackCommonItemPriorities(rucksacks))
+
+def part2(f):
+
+    rucksacks = []
+    groups = []
+
+    i = 0
+    #for each line
+    for rucksack in f:
+        if i < 3:
+            rucksacks.append(rucksack.strip())
+            i += 1
+        else:
+            groups.append(rucksacks)
+            rucksacks = []
+            rucksacks.append(rucksack)
+            i = 1
+    groups.append(rucksacks)
+
+    
+    total = 0
+    for group in groups:
+        common = commonItem(group[0], group[1], group[2])
+        total += convertItemToPriority(common)
+    print(total)
+
+def main():
+    f = open(filepath)
+    part2(f)
 
 main()
