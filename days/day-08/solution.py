@@ -106,34 +106,29 @@ def setTreeVisibilities(treeGrid):
 
 def countVisibleTreesUp(tree, treeGrid):
     visibleTrees = 0
-    maxHeight = 0
     for y in range(tree.y-1, -1, -1):
         lookingAtTree = getTreeAt(tree.x, y,treeGrid)
         if lookingAtTree.height >= tree.height:
             visibleTrees += 1
             return visibleTrees
-        elif lookingAtTree.height >= maxHeight and lookingAtTree.height < tree.height:
+        elif lookingAtTree.height < tree.height:
             visibleTrees += 1
-            maxHeight = lookingAtTree.height
     return visibleTrees
 
 def countVisibleTreesRight(tree, treeGrid):
     visibleTrees = 0
-    maxHeight = 0
     width, _ = getDimensions(treeGrid)
     for x in range(tree.x+1, width):
         lookingAtTree = getTreeAt(x, tree.y,treeGrid)
         if lookingAtTree.height >= tree.height:
             visibleTrees += 1
             return visibleTrees
-        elif lookingAtTree.height >= maxHeight and lookingAtTree.height < tree.height:
+        elif lookingAtTree.height < tree.height:
             visibleTrees += 1
-            maxHeight = lookingAtTree.height
     return visibleTrees
 
 def countVisibleTreesDown(tree,treeGrid):
     visibleTrees = 0
-    maxHeight = 0
     _, height = getDimensions(treeGrid)
     for y in range(tree.y+1, height):
         print("down", y)
@@ -144,16 +139,14 @@ def countVisibleTreesDown(tree,treeGrid):
             visibleTrees += 1
             print("down last visible tree")
             return visibleTrees
-        elif lookingAtTree.height >= maxHeight and lookingAtTree.height < tree.height:
+        elif lookingAtTree.height < tree.height:
             print("down visible tree")
             visibleTrees += 1
-            maxHeight = lookingAtTree.height
         
     return visibleTrees
 
 def countVisibleTreesLeft(tree,treeGrid):
     visibleTrees = 0
-    maxHeight = 0
     for x in range(tree.x-1, -1, -1):
         print("left", x)
 
@@ -163,11 +156,10 @@ def countVisibleTreesLeft(tree,treeGrid):
             print("left last visible tree")
 
             return visibleTrees
-        elif lookingAtTree.height >= maxHeight and lookingAtTree.height < tree.height:
+        elif lookingAtTree.height < tree.height:
             print("left visible tree")
 
             visibleTrees += 1
-            maxHeight = lookingAtTree.height
     return visibleTrees
 
 
@@ -196,7 +188,7 @@ def getTreeWithMaxScenicScore(treeGrid):
     return maxScoreTree
 
 def main():
-    treeGrid = getTreeGrid('test.txt')
+    treeGrid = getTreeGrid('input.txt')
     printTreeGrid(treeGrid, True)
     printTreeGrid(treeGrid, False)
 
